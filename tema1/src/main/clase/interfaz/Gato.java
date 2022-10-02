@@ -1,0 +1,18 @@
+package main.clase.interfaz;
+
+public class Gato implements Sonido{
+
+    @Override
+    public void emitirSonido() {
+        // TODO Auto-generated method stub
+        System.out.println("miauuu");
+    }
+
+    @Override
+    public void silencio() {
+        // TODO Auto-generated method stub
+       System.out.println("------------");
+    }
+    
+    
+}
