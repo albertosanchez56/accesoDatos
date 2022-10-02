@@ -3,6 +3,7 @@ package main.entregaalberto.Parking;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Period;
 import java.time.temporal.ChronoField;
 import java.time.temporal.ChronoUnit;
 
@@ -23,7 +24,7 @@ public class ParkingVehiculo implements Parking {
     @Override
     public LocalTime aparcaCoche(Vehiculo otroVehiculo) {
         // TODO Auto-generated method stub
-        System.out.println("Aparco coche "+otroVehiculo.getdFechaIicio());
+       
         iPlazasOcupadas+=1;
         LocalTime fechaini = otroVehiculo.getdFechaIicio();
        
@@ -44,7 +45,7 @@ public class ParkingVehiculo implements Parking {
 
     @Override
     public LocalTime sacaCoche(Vehiculo otroVehiculo) {
-        System.out.println("saco coche"+otroVehiculo.getdFechaFin());
+        
         aparcaCoche(otroVehiculo);
         // TODO Auto-generated method stub
         LocalTime Fechafin = otroVehiculo.getdFechaFin();
@@ -56,16 +57,13 @@ public class ParkingVehiculo implements Parking {
     @Override
     public double getFactura(Vehiculo otroVehiculo) {
         // TODO Auto-generated method stub
-       // Duration diff = Duration.between(aparcaCoche(otroVehiculo),sacaCoche(otroVehiculo));
-        //Double sAparacar = Double.valueOf(aparcaCoche(otroVehiculo));
-       long diff = ChronoUnit.SECONDS.between(aparcaCoche(otroVehiculo), sacaCoche(otroVehiculo));
-       Double dDiff = Double.valueOf(diff);
-        System.out.println(dDiff);
-        double dFactura=0;
-      /* long tiempoTranscurrido = sacaCoche(otroVehiculo).getLong(ChronoField.HOUR_OF_DAY)-aparcaCoche(otroVehiculo).getLong(ChronoField.HOUR_OF_DAY);
-       System.out.println(tiempoTranscurrido);*/ 
-       return dFactura;
-        //double Factura=(sacaCoche(otroVehiculo) - aparcaCoche(otroVehiculo))*PRECIO;
-       // System.out.println("La factura son "+Factura+" euros");
+    
+        long diff = sacaCoche(otroVehiculo).getMinute() -aparcaCoche(otroVehiculo).getMinute();
+        Double dDiff = Double.valueOf(diff);
+        Double factura = dDiff * PRECIO;
+        System.out.println("Debe pagar "+factura+" euros");
+       
+       return factura;
+      
     }
 }
